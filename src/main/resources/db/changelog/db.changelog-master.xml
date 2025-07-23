@@ -14,4 +14,5 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="classpath:db/changelog/change/a.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:db/changelog/change/created_Item.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
