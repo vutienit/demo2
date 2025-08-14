@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 import tien.example.demo2.domain.Item;
 import tien.example.demo2.dto.ItemDTO;
 import tien.example.demo2.mapper.ItemMapper;
@@ -35,6 +37,13 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Page<ItemDTO> findAllPaging(Pageable pageable) {
         return itemRepository.findAllPaging(pageable);
+    }
+
+    @Override
+    public List<ItemDTO> findAll() {
+        return itemRepository.findAll().stream()
+                .map(itemMapper::toDto)
+                .collect(Collectors.toList());
     }
 
 
