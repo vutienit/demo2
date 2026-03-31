@@ -30,4 +30,41 @@ public class ItemResource {
     public Page<ItemDTO> findByName(@RequestParam(value = "name") String name, Pageable pageable) {
         return itemService.findByName(name, pageable);
     }
+
+    @DeleteMapping("/delete-all")
+    public void deleteAll() {
+        itemService.deleteAll();
+    }
+
+    @PostMapping("/test-transaction")
+    public void test_transaction(@RequestParam(value = "param") int param) throws Exception {
+        switch (param) {
+            case 1 :
+                itemService.testTransactionCase_1();
+                break;
+            case 2 :
+                itemService.testTransactionCase_2();
+                break;
+            case 3 :
+                itemService.testTransactionCase_3();
+                break;
+            case 4 :
+                itemService.testTransactionCase_4();
+                break;
+            case 5 :
+                itemService.testTransactionCase_5();
+                break;
+            case 6 :
+                itemService.testTransactionCase_6();
+                break;
+            default:
+                System.out.println("Nothing happened....");
+                break;
+        }
+    }
+
+    @PostMapping("/test-thread")
+    public void test_thread() throws Exception {
+        itemService.test_thread();
+    }
 }
