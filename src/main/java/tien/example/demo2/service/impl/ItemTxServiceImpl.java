@@ -1,13 +1,10 @@
 package tien.example.demo2.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tien.example.demo2.domain.Item;
-import tien.example.demo2.mapper.ItemMapper;
 import tien.example.demo2.repository.ItemRepository;
-import tien.example.demo2.repository.ItemRepositoryNative;
 import tien.example.demo2.service.ItemTxService;
 
 import java.math.BigDecimal;
@@ -15,8 +12,11 @@ import java.math.BigDecimal;
 @Service
 public class ItemTxServiceImpl implements ItemTxService {
 
-    @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
+
+    public ItemTxServiceImpl(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
