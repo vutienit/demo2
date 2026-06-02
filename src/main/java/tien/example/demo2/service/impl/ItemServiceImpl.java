@@ -210,7 +210,7 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.save(item);
     }
 
-    void saveItemException() {
+    void saveItemException() throws Exception{
         Item item = new Item();
         item.setName("transaction normal");
         item.setPrice(new BigDecimal(1000000));
