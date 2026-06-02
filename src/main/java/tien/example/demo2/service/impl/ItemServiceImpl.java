@@ -1,6 +1,5 @@
 package tien.example.demo2.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,21 +13,22 @@ import tien.example.demo2.service.ItemService;
 import tien.example.demo2.service.ItemTxService;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
+    private final ItemRepositoryNative itemRepositoryNative;
+    private final ItemMapper itemMapper;
+    private final ItemTxService itemTxService;
 
-    @Autowired
-    private ItemRepositoryNative itemRepositoryNative;
-
-    @Autowired
-    private ItemMapper itemMapper;
-
-    @Autowired
-    private ItemTxService itemTxService;
+    public ItemServiceImpl(ItemRepository itemRepository, ItemRepositoryNative itemRepositoryNative, ItemMapper itemMapper, ItemTxService itemTxService) {
+        this.itemRepository = itemRepository;
+        this.itemRepositoryNative = itemRepositoryNative;
+        this.itemMapper = itemMapper;
+        this.itemTxService = itemTxService;
+    }
 
     @Override
     @Transactional
@@ -218,5 +218,28 @@ public class ItemServiceImpl implements ItemService {
         int j = k;
         System.out.println(j);
         itemRepository.save(item);
+    }
+
+    void test_exp(String type) {
+        var fee = switch (type) {
+            case "VIP" -> 100;
+            case "NORMAL" -> 50;
+            default -> 0;
+        };
+        var k = 0;
+        var t = switch(k) {
+            case 0 -> "h";
+            default -> "t";
+        };
+
+        String sql = """
+                select *
+                from Item i
+                where i.id = 1
+                """;
+
+        var itemList = new ArrayList<String>();
+        itemList.stream().filter()
+
     }
 }
