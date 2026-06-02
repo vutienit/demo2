@@ -238,8 +238,5 @@ public class ItemServiceImpl implements ItemService {
                 where i.id = 1
                 """;
 
-        var itemList = new ArrayList<String>();
-        itemList.stream().filter()
-
     }
 }
